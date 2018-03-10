@@ -90,4 +90,8 @@ export class DashboardPage {
        });
     }
 
+    tryAgain() {
+      this.navCtrl.setRoot('dashboard'); 
+    }
+
 }
