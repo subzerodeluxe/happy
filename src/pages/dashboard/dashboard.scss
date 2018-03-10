@@ -4,17 +4,35 @@
         ion-content {
             background-image: url('../assets/imgs/onboarding_bg.png');
         }
-        p, h2 {
+        p, h2, h3 {
             color: #fff; 
         }
-
+        
         .details {
-            margin-top: 37vh;  
+            margin-top: 35vh;  
         }
 
+        .outcome {
+            margin-top: 20vh;
+        }
+
+        .explain {
+            padding-top: 10vh; 
+        }
+
+        .result #top {
+            font-weight: 300; 
+            font-size: 2.7rem; 
+        }
+
+        .explain #top {
+            font-weight: 300; 
+            font-size: 2.2rem; 
+        }
+    
         .title-box {
             display: block;
-        }
+        }        
 
         .title-box #bottom {
             font-weight: 700; 

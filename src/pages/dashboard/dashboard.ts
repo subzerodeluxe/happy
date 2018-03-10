@@ -24,14 +24,15 @@ export class DashboardPage {
   loading: Loading;
   image: string; 
   shakeButton: boolean = true;
-
   constructor(public camera: Camera, public alertCtrl: AlertController, public toastCtrl: ToastController, public loadingCtrl: LoadingController, 
     public afs: AngularFirestore, public storage: AngularFireStorage,
     public navCtrl: NavController, public navParams: NavParams) {
 
       this.loading = this.loadingCtrl.create({
-        content: "Finding out if it's a human ..."
+        spinner: 'dots',
+        content: "Finding out if it's a human or an object. Stay tuned ..."
       })
+
   }
 
   startUpload(file: string) {
@@ -72,7 +73,7 @@ export class DashboardPage {
       .then((imageData) => {
         let toast = this.toastCtrl.create({
           message: 'Image was succesfully sent',
-          duration: 1500,
+          duration: 3500,
           position: 'bottom'
         });
       

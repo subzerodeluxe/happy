@@ -1,21 +1,41 @@
 <ion-content padding scrollbar-y-auto>
-  <div class="details">
-    
-    <ion-col *ngIf="result$ | async as result">
-      <h3>Is it a human?</h3>
-      <h2 *ngIf="result.human === true" color="secondary">Yes. It is a human!</h2>
-       
-      <h3>Labels:</h3>
-      <ion-chip color="secondary" *ngFor="let label of result.labels">
-        <ion-label>{{ label }}</ion-label>
-      </ion-chip>
-    </ion-col>
+  
+  <div class="details" *ngIf="!result$">
+    <div padding-left class="title-box">
+      <h2><span id="top">Human,</span><br>
+      <span id="bottom">Or object?</span></h2>
+    </div>
 
-    <p text-center class="bottom-title" 
-      [ngClass]="{'slide-big': shakeButton}" 
-      (click)="captureAndUpload()">Upload Image</p>
+    <div padding-left class="intro">
+      <p>Not sure what something is?<br>Take a picture of it and this app will tell you.</p>
+    </div>
   </div>
 
+  <div class="outcome" *ngIf="result$ | async as result">
+    <div class="result">
+      <h2><span id="top">Is it a human?</span><br>
+        <span id="bottom" *ngIf="result.human === false" >Nope, this certainly isn't human!</span>
+        <span id="bottom" *ngIf="result.human === true" >Yes. We got a human over here!</span>
+      </h2>
+    </div>
+      
+    <div class="explain">
+      <h2>
+        <span *ngIf="result.human === true" id="top">Well, at least based on these chararistics:</span>
+        <span *ngIf="result.human === false" id="top">Well, what is it then? You tell me!</span>
+      </h2>
+      <ion-chip color="light" *ngFor="let label of result.labels">
+        <ion-label>{{ label }}</ion-label>
+      </ion-chip>
+    </div>
+  </div>
+
+  <div text-center class="bottom-title">
+      <button ion-button text-center color="light" outline *ngIf="!result$"  
+      [ngClass]="{'slide-big': shakeButton}" 
+      (click)="captureAndUpload()">Take a Picture</button>
+  </div>
+  
 </ion-content>
 
 
