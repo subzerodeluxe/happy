@@ -1,6 +1,6 @@
 {
   "name": "happy",
-  "app_id": "",
+  "app_id": "c05ed65c",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

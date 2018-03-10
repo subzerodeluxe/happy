@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, LoadingController, Loading, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, LoadingController, Loading, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import { tap, filter } from 'rxjs/operators'; 
@@ -20,17 +20,17 @@ export class DashboardPage {
 
   // Upload tasks
   task: AngularFireUploadTask;
-  results: Observable<any>;
+  result$: Observable<any>;
   loading: Loading;
   image: string; 
   shakeButton: boolean = true;
 
-  constructor(public camera: Camera, public loadingCtrl: LoadingController, 
+  constructor(public camera: Camera, public alertCtrl: AlertController, public toastCtrl: ToastController, public loadingCtrl: LoadingController, 
     public afs: AngularFirestore, public storage: AngularFireStorage,
     public navCtrl: NavController, public navParams: NavParams) {
 
       this.loading = this.loadingCtrl.create({
-        content: "Finding out if it's a girl ..."
+        content: "Finding out if it's a human ..."
       })
   }
 
@@ -45,7 +45,7 @@ export class DashboardPage {
     const photoRef = this.afs.collection('photos').doc(docId); // set the photoRef in collection
 
     // Firestore observable
-    this.results = photoRef.valueChanges()
+    this.result$ = photoRef.valueChanges()
       .pipe(
         filter(data => !!data),
         tap(_ => this.loading.dismiss())
@@ -57,16 +57,36 @@ export class DashboardPage {
   }
 
   // Take picture and start the upload
-  async captureAndUpload() {  
+  captureAndUpload() {  
     const options: CameraOptions = {
       quality: 100,
+      targetWidth: 900,
+      targetHeight: 600,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      saveToPhotoAlbum: false
     }
 
-    const base64 = await this.camera.getPicture(options);
-
-    this.startUpload(base64); 
-  }
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        let toast = this.toastCtrl.create({
+          message: 'Image was succesfully sent',
+          duration: 1500,
+          position: 'bottom'
+        });
+      
+        toast.present();
+          this.startUpload(imageData); 
+        })
+      .catch((err) => {
+        let alert = this.alertCtrl.create({
+          title: 'Something went wrong',
+          message: err,
+          buttons: ['Dismiss']
+        });
+        alert.present();
+       });
+    }
 
 }

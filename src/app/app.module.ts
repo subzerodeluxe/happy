@@ -19,7 +19,7 @@ const firebaseConfig = {
   authDomain: "happy-9aced.firebaseapp.com",
   databaseURL: "https://happy-9aced.firebaseio.com",
   projectId: "happy-9aced",
-  storageBucket: "happy-9aced.appspot.com",
+  storageBucket: "gs://happy-9aced-functions",
   messagingSenderId: "27089693956"
 }
 

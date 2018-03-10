@@ -22,7 +22,7 @@ export const imageTagger = functions.storage
         const filePath = object.name; 
 
         // Location of saved file in bucket
-        const imageUri = `gs://${bucketName}/${filePath}`; 
+        const imageUri = `gs://${bucketName}/${filePath}`;
 
         // Firestore docID === file name  
         const docId = filePath.split('.jpg')[0];  // remove the .jpg extension

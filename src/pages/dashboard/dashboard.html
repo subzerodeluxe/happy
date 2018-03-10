@@ -1,28 +1,19 @@
 <ion-content padding scrollbar-y-auto>
   <div class="details">
-    <p text-center class="bottom-title" 
-      [ngClass]="{'slide-big': shakeButton}" 
-      (click)="captureAndUpload()">Upload Image</p>
-
-    <ion-col *ngIf="results | async as result">
-  
+    
+    <ion-col *ngIf="result$ | async as result">
       <h3>Is it a human?</h3>
-  
-      <button ion-button full *ngIf="result.human" color="secondary">
-        Yes. It is a human!
-      </button>
-  
-      <h3>Labels</h3>
-  
+      <h2 *ngIf="result.human === true" color="secondary">Yes. It is a human!</h2>
+       
+      <h3>Labels:</h3>
       <ion-chip color="secondary" *ngFor="let label of result.labels">
         <ion-label>{{ label }}</ion-label>
       </ion-chip>
-  
-    
-  
     </ion-col>
 
-
+    <p text-center class="bottom-title" 
+      [ngClass]="{'slide-big': shakeButton}" 
+      (click)="captureAndUpload()">Upload Image</p>
   </div>
 
 </ion-content>
