@@ -13,16 +13,6 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDASOGIcg8H40dVngnXjqxqoXt0vQDQlic",
-  authDomain: "happy-9aced.firebaseapp.com",
-  databaseURL: "https://happy-9aced.firebaseio.com",
-  projectId: "happy-9aced",
-  storageBucket: "gs://happy-9aced-functions",
-  messagingSenderId: "27089693956"
-}
-
 @NgModule({
   declarations: [
     MyApp,
